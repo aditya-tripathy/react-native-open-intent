@@ -29,7 +29,7 @@ public class OpenIntentModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void openIntent(String url, final Promise promise) {
+    public void openLink(String url, final Promise promise) {
         // TODO: Implement some actually useful functionality
         intentPromise = promise;
         Uri uri = Uri.parse(url);

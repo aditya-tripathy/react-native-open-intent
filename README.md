@@ -13,5 +13,15 @@
 import OpenIntent from 'react-native-open-intent';
 
 // TODO: What to do with the module?
-OpenIntent;
+const openIntentHandler = async (url) => {
+
+    let openIntentData = null;
+        try {
+            openIntentData = await OpenIntent.openLink(url);
+            console.log('openIntentData: ', openIntentData);
+
+        } catch (error) {
+            console.log('error: ', error);
+        }
+}
 ```
