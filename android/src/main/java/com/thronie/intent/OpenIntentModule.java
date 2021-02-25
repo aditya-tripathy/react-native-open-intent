@@ -11,15 +11,19 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
+import android.content.pm.PackageManager;
+import android.content.Context;
 
 public class OpenIntentModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext reactContext;
     private Promise intentPromise;
+    private Context ctx;
 
     public OpenIntentModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
+        this.ctx = reactContext.getApplicationContext();
         reactContext.addActivityEventListener(mActivityEventListener);
     }
 
@@ -39,6 +43,17 @@ public class OpenIntentModule extends ReactContextBaseJavaModule {
             this.reactContext.startActivityForResult(intent, 5864, null);
         } catch (Exception e){
             intentPromise.reject("Failed", "NO APP FOUND");
+        }
+    }
+
+    @ReactMethod
+    public void isPackageInstalled(String packageName, Callback cb) {
+        PackageManager pm = this.ctx.getPackageManager();
+        try {
+            pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
+            cb.invoke(true);
+        } catch (Exception e) {
+            cb.invoke(false);
         }
     }
 
