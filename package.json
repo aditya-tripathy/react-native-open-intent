@@ -1,7 +1,7 @@
 {
   "name": "react-native-open-intent",
   "title": "React Native Open Intent",
-  "version": "1.0.12",
+  "version": "1.0.15",
   "description": "React native open intent can help you to open custom intent",
   "main": "index.js",
   "files": [
